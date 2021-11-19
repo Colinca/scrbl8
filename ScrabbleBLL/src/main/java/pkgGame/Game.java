@@ -1,6 +1,7 @@
 package pkgGame;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -11,6 +12,13 @@ import pkgExceptions.DrawException;
 import pkgExceptions.GameException;
 import pkgExceptions.MoveException;
 import pkgUtil.CircularLinkedList;
+
+/*
+ * addPlayerTile()--
+ * removePlayerTile()--
+ * getPlayersTiles()--
+ * StartGame()
+ */
 
 public class Game {
 
@@ -37,8 +45,20 @@ public class Game {
 	 * @throws GameException
 	 */
 
-	public void StartGame() throws DrawException, GameException {
-		// TODO: Complete this method
+	public void StartGame() throws DrawException, GameException 
+	{
+		Game game = new Game();
+		
+		if(game.GetGamePlayerCount() > 0)
+		{
+			for(int i=0; i<7;i++)
+			{
+				addPlayerTile(cllPlayers.getCurrent(), this.GameBoard.drawLetter());
+			}
+		}
+		
+		else
+			throw new GameException(game, eGameExceptionType.NoPlayers);
 	}
 
 	public Player MakeMove(Move m) throws MoveException {
@@ -77,12 +97,12 @@ public class Game {
 	 * @param p
 	 */
 
-	private ArrayList<Letter> getPlayersTiles(Player p) {
+	private ArrayList<Letter> getPlayersTiles(Player p) 
+	{
 		// TODO: Complete this method
 
 		// FIXME: I don't want to return a null!
-		return null;
-
+		return playerTileRack.get(p);
 	}
 
 	/**
@@ -95,8 +115,10 @@ public class Game {
 	 * @param l
 	 */
 
-	private void removePlayerTile(Player p, Letter l) {
+	private void removePlayerTile(Player p, Letter l) 
+	{
 		// TODO: Complete this method
+		playerTileRack.get(p).remove(l);
 	}
 
 	/**
@@ -108,8 +130,9 @@ public class Game {
 	 * @param p
 	 * @param l
 	 */
-	private void addPlayerTile(Player p, Letter l) {
-		// TODO: Complete this method
+	private void addPlayerTile(Player p, Letter l) 
+	{
+		playerTileRack.get(p).add(l);
 	}
 
 	public UUID getGameID() {

@@ -7,6 +7,16 @@ import eNum.eBonusType;
 import eNum.eMoveResult;
 import eNumExceptions.eDrawExceptionType;
 import pkgExceptions.DrawException;
+import java.util.Random;
+
+/* getTileBag()--
+ * RemoveLettersFromTileBag(ArrayLister<Letter>)--
+ * CreateTileBag()
+ * AddLetterToTileBag()??
+ * drawLetter()--
+ */
+
+
 
 public class Board {
 
@@ -68,9 +78,17 @@ public class Board {
 	 */
 	protected Letter drawLetter() throws DrawException {
 		// TODO: Complete this method
-
 		// FIXME: I don't want to return null!
-		return null;
+		Random rand = new Random();
+		
+		if(tileBag.size() > 0)
+		{
+			Letter l = tileBag.remove(rand.nextInt(tileBag.size()));
+			return l;
+		}
+		
+		else
+			throw new DrawException(eDrawExceptionType.TileBagEmpty);
 	}
 
 	/**
@@ -81,10 +99,11 @@ public class Board {
 	 * @since Lab #8
 	 * @return - ArrayList<Letter> of remaining tiles
 	 */
-	private ArrayList<Letter> getTileBag() {
+	private ArrayList<Letter> getTileBag() 
+	{
 		// TODO: Complete this method
 		// FIXME: I don't want to return null
-		return null;
+		return tileBag;
 	}
 
 	/**
@@ -95,8 +114,11 @@ public class Board {
 	 * @since Lab #4
 	 * @param removeLetters
 	 */
-	private void RemoveLettersFromTileBag(ArrayList<Letter> removeLetters) {
+	private void RemoveLettersFromTileBag(ArrayList<Letter> removeLetters) 
+	{
 		// TODO: Complete this method
+		
+		tileBag.removeAll(removeLetters);
 	}
 
 	/**
@@ -106,8 +128,14 @@ public class Board {
 	 * @version Lab #8
 	 * @since Lab #8
 	 */
-	private void CreateTileBag() {
-		// TODO: Complete this method
+	private void CreateTileBag() 
+	{
+        char arr1[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z', ' '};
+        int arr2[] = {9,2,2,4,12,2,3,2,9,1,1,4,2,6,8,2,1,6,4,6,4,2,2,1,2,1,2};
+        for (int i=0; i<26; i++) 
+        {
+            AddLetterToTileBag(arr1[i], arr2[i]);
+        }
 	}
 
 	/**
@@ -117,9 +145,10 @@ public class Board {
 	 * @version Lab #8
 	 * @since Lab #8
 	 */
-	private void AddLetterToTileBag(Character c, int num) {
-		// TODO: Complete this method
-	}
+	private void AddLetterToTileBag(Character c, int num) 
+	{
+
+    }
 
 	public boolean isAnySpaceUsed(ArrayList<Space> spaces) {
 		for (Space s : spaces) {
