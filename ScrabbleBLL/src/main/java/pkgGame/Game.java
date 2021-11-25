@@ -48,16 +48,26 @@ public class Game {
 	public void StartGame() throws DrawException, GameException 
 	{
 		Game game = new Game();
+		Move m = new Move(GameBoard, cllPlayers.getCurrent());
 		
-		if(game.GetGamePlayerCount() > 0)
+		if(cllPlayers.size() > 0)
 		{
-			for(int i=0; i<7;i++)
+			
+			try {
+				MakeMove(m);
+			} catch (MoveException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			for(int iDraw = getPlayersTiles(cllPlayers.getCurrent()).size(); iDraw < 7; iDraw++) 
 			{
 				addPlayerTile(cllPlayers.getCurrent(), this.GameBoard.drawLetter());
 			}
 		}
 		
 		else
+			System.out.print("wrong");
 			throw new GameException(game, eGameExceptionType.NoPlayers);
 	}
 
@@ -102,6 +112,7 @@ public class Game {
 		// TODO: Complete this method
 
 		// FIXME: I don't want to return a null!
+		
 		return playerTileRack.get(p);
 	}
 

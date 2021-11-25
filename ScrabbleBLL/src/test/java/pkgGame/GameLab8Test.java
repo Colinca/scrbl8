@@ -115,6 +115,7 @@ public class GameLab8Test {
 		g.AddPlayer(p2);
 		
 		assertEquals(2,g.GetGamePlayerCount());
+		System.out.print(g.GetGamePlayerCount());
 		
 		try {
 			g.StartGame();
@@ -123,6 +124,7 @@ public class GameLab8Test {
 		}
 		
 		assertEquals(p2,g.getCurrentPlayer());
+		System.out.print(g.getCurrentPlayer());
 		g.advancePlayer();
 		assertEquals(p1,g.getCurrentPlayer());
 		
