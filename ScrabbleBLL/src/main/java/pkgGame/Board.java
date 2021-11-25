@@ -116,8 +116,11 @@ public class Board {
 	private void RemoveLettersFromTileBag(ArrayList<Letter> removeLetters) 
 	{
 		// TODO: Complete this method
-		
-		tileBag.removeAll(removeLetters);
+		for(int i=0; i<removeLetters.size(); i++)
+		{
+			Letter e = removeLetters.get(i);
+			tileBag.remove(removeLetters.indexOf(e));
+		}
 	}
 
 	/**

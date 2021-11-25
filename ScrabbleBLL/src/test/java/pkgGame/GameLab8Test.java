@@ -28,9 +28,9 @@ public class GameLab8Test {
 		letters.add(new Letter('B'));
 		
 		tileBag = BoardUtil.getTileBag(b);
-		assertEquals(92,BoardUtil.getTileBag(b).size());
+		assertEquals(100,BoardUtil.getTileBag(b).size());
 		b = BoardUtil.RemoveTileFromBag(b, letters);
-		assertEquals(90,BoardUtil.getTileBag(b).size());
+		assertEquals(98,BoardUtil.getTileBag(b).size());
 		Util.PrintEnd(new Throwable().getStackTrace()[0].getMethodName());
 	}
 	
