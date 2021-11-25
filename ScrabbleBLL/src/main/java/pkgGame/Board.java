@@ -24,7 +24,6 @@ public class Board {
 	private ArrayList<BonusSquare> bonuses = new ArrayList<BonusSquare>();
 	private ArrayList<Move> movesMade = new ArrayList<Move>();
 	private ArrayList<Letter> tileBag = new ArrayList<Letter>();
-
 	/**
 	 * Board - Set the bonus squares. Create the TileBag, Shuffle the Tilebag
 	 * 
@@ -130,9 +129,9 @@ public class Board {
 	 */
 	private void CreateTileBag() 
 	{
-        char arr1[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z', ' '};
+        char arr1[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z', '_'};
         int arr2[] = {9,2,2,4,12,2,3,2,9,1,1,4,2,6,8,2,1,6,4,6,4,2,2,1,2,1,2};
-        for (int i=0; i<26; i++) 
+        for (int i=0; i<27; i++) 
         {
             AddLetterToTileBag(arr1[i], arr2[i]);
         }
@@ -147,8 +146,11 @@ public class Board {
 	 */
 	private void AddLetterToTileBag(Character c, int num) 
 	{
-
-    }
+		for(int i=0; i<num; i++)
+		{
+			tileBag.add(new Letter(c));
+		}
+	}
 
 	public boolean isAnySpaceUsed(ArrayList<Space> spaces) {
 		for (Space s : spaces) {
