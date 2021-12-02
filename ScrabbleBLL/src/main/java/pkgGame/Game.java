@@ -46,29 +46,28 @@ public class Game {
 	 */
 
 	public void StartGame() throws DrawException, GameException 
-	{
-		Game game = new Game();
-		Move m = new Move(GameBoard, cllPlayers.getCurrent());
+	{	
+		System.out.print(GetGamePlayerCount());
 		
-		if(cllPlayers.size() > 0)
+		if(GetGamePlayerCount() > 0)
 		{
-			
-			try {
-				MakeMove(m);
-			} catch (MoveException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			for(int iDraw = getPlayersTiles(cllPlayers.getCurrent()).size(); iDraw < 7; iDraw++) 
+			for (int iDraw = getPlayersTiles(cllPlayers.getCurrent()).size(); iDraw < 7; iDraw++) 
 			{
-				addPlayerTile(cllPlayers.getCurrent(), this.GameBoard.drawLetter());
+				try 
+				{
+					addPlayerTile(cllPlayers.getCurrent(), this.GameBoard.drawLetter());
+				} 
+				catch (DrawException e) 
+				{
+					if (e.getDrawExceptionType() == eDrawExceptionType.TileBagEmpty) 
+					{
+						// Nothing to do, no more tiles to draw
+					}
+				}
 			}
 		}
-		
 		else
-			System.out.print("wrong");
-			throw new GameException(game, eGameExceptionType.NoPlayers);
+			throw new GameException(null, eGameExceptionType.NoPlayers);
 	}
 
 	public Player MakeMove(Move m) throws MoveException {
@@ -127,10 +126,11 @@ public class Game {
 	 */
 
 	private void removePlayerTile(Player p, Letter l) 
-	{
-		// TODO: Complete this method
-		playerTileRack.get(p).remove(l);
-	}
+    {
+        ArrayList<Letter> n = getPlayersTiles(p);
+        n.remove(l);
+        playerTileRack.put(p.getPlayerID(), n);
+    }
 
 	/**
 	 * addPlayerTile - Add a tile to a player's TileRack
@@ -141,10 +141,12 @@ public class Game {
 	 * @param p
 	 * @param l
 	 */
-	private void addPlayerTile(Player p, Letter l) 
-	{
-		playerTileRack.get(p).add(l);
-	}
+	 private void addPlayerTile(Player p, Letter l) 
+	 {
+		 ArrayList<Letter> n = getPlayersTiles(p);
+	     n.add(l);
+	     playerTileRack.put(p.getPlayerID(), n);
+	 }
 
 	public UUID getGameID() {
 		return GameID;

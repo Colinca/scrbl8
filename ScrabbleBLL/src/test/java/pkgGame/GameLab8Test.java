@@ -114,8 +114,8 @@ public class GameLab8Test {
 		g.AddPlayer(p1);
 		g.AddPlayer(p2);
 		
-		assertEquals(2,g.GetGamePlayerCount());
 		System.out.print(g.GetGamePlayerCount());
+		assertEquals(2,g.GetGamePlayerCount());
 		
 		try {
 			g.StartGame();
